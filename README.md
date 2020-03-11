@@ -6,10 +6,11 @@
 
 For my final project I have been thinking on how to connect what I have learned in the class and what I have also learn working with the Raspberry PI and Arduino. I wanted to somehow have my own "backyard" of connections I have going around. For eample, If I am having any one of my Microncontrollers sending any type of data from a sensor, I will be able to see it graphed in my webpage. This way, I can create a boilerplate for myself to store my data in some database online, and also have options of seeing multiple devices at the same time through some kind of appealing UI. Also, If I can input this data into my site I might be able to connect it to any other input or output, video stream, etc... in the future. I have two PIs and two arduinos laying around, so I might as well put them to use now.
 
-I would start with documenting MongoDB's limits, maybe look at heroku or some other service that allows seamless updating. After the data can be fetched, I would grab the data stream and implement it into the UI. I would make an object for each of my sensors to send to my database, with a key/value pair which would correspond to :
+I would start with documenting MongoDB's limits, maybe look at Heroku instead of Glitch also, or some other service that allows seamless updating. After the data can be fetched, I would grab the data stream and implement it into the UI. I would make an object for each of my sensors to send to my database, with a key/value pair which would correspond to :
 
 
-```{
+```
+    {
         "IP Address": "",
         "Device Type": "",
         "Timestamp":"",
@@ -26,6 +27,7 @@ I would be very grateful If I could receive advice as to how to be able to updat
 
 References: 
 1. I saw this tool called [Alooma Live](https://www.alooma.com/getlive), for working with data streams. [Here is how it looks in action](https://www.alooma.com/live).
+2. I also know D3 and Three.js are options.
 
 
 ## Setup
