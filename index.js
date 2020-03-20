@@ -1,19 +1,26 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const express = require('express');
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
+io.on('connection', function (socket) {
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
+	console.log(`User connected in socket ${socket.id}`);
+	//handle when a user disconnects
+	socket.on('disconnect', function () {
+		console.log(`User disconnected in socket ${socket.id} `);
+	});
+	//receive messages with the 'message' event
+	socket.on('message', function (msg) {
+		console.log(`User in socket ${socket.id} sent a message: ${msg}`);
+	});
 
+});
+//listen to the port 3000
+http.listen(3000, function () {
+	console.log('Listening on port 3000');
+});

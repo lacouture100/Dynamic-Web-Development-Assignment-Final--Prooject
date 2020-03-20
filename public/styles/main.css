@@ -89,61 +89,9 @@ body {
     padding: 1%;
 }
 
-.category {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    border: 1px solid #da0505;
-    height: 300px;
-    width: 22%;
-    margin: 1%;
+.connected__status{
+    color:white;
 }
-
-.category__label {
-    display: flex;
-    flex-direction: row;
-    font-family: OpenSans-Regular;
-    color: red;
-    text-align: center;
-    border:red;
-}
-
-.category__content{
-    display: flex;
-    flex-direction: column;
-    font-family: OpenSans-Regular;
-    text-align: left;
-}
-
-.category__button{
-    background-color: rgba(224, 255, 255, 0.021);
-    color: blanchedalmond;
-    text-align: center;
-
-}
-
-.idea {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #232323;
-    width: 100%;
-    margin: 1%;
-}
-
-.idea__label {
-    display: flex;
-    font-family: OpenSans-Regular;
-    color: red;
-    text-align: left;
-}
-
-.idea__text {
-    display: flex;
-    font-family: OpenSans-Regular;
-    color: greenyellow;
-    text-align: left;
-}
-
 @media screen and (max-width:2400px) {}
 
 @media screen and (max-width:1400px) {}
