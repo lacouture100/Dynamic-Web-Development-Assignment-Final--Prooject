@@ -15,38 +15,8 @@
 <body>
     <h1>Test your connections here!</h1>
 
-    <script>
-        //Define global variables
-        let socket;
-        let value = 10;
+    <script src="/public/js/client.js">
 
-        //Wait for the socket connection to happen
-        async function connectSocket() {
-
-            socket = io.connect('http://localhost:3000');
-            //logging the socket object
-            console.log(socket)// 
-            //trying to log the socket id
-            console.log(socket.id) //<---the property no longer exists
-        }
-        //wait for the socket to connect and then send a message
-        connectSocket().then(
-            socket.emit('message', value)
-        )
-        if (socket.connected == true) {
-            //Create a a header with the connected socket ID 
-            let connectedContainer = document.createElement("div");
-            let connectedStatus = document.createElement("h2");
-            connectedStatus.setAttribute("class", "connected__status");
-            connectedStatus.setAttribute("id", `${socket.id}__status`);
-            connectedStatus.textContent = `${socket.id} Connected!`;
-            document.body.appendChild(connectedContainer);
-            connectedContainer.appendChild(connectedStatus)
-        } else {
-            // If the socket is not connected print not connected.
-            console.log("Not connected")
-            socket.emit('message', value)// <----Is still emits.
-        }
     </script>
 </body>
 
