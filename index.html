@@ -19,11 +19,12 @@
         //Define global variables
         let socket;
         let value = 10;
+        let serverURL = 'https://lacouture100-dynamic-web-development-final-project.glitch.me/'
 
         //Wait for the socket connection to happen
         async function connectSocket() {
 
-            socket = io.connect('http://localhost:3000');
+            socket = io.connect(`${serverURL}:3000`);
             //logging the socket object
             console.log(socket) // <
             //trying to log the socket id
