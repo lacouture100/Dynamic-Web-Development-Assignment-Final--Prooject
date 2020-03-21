@@ -25,7 +25,7 @@
 
             socket = io.connect('http://localhost:3000');
             //logging the socket object
-            console.log(socket)// <
+            console.log(socket) // <
             //trying to log the socket id
             console.log(socket.id) //<---the property no longer exists
         }
@@ -33,6 +33,11 @@
         connectSocket().then(
             socket.emit('message', value)
         )
+
+        socket.on('message', function (msg) {
+            console.log(`Server sent a message: ${msg}`);
+        });
+
         if (socket.connected == true) {
             //Create a a header with the connected socket ID 
             let connectedContainer = document.createElement("div");
@@ -45,7 +50,7 @@
         } else {
             // If the socket is not connected print not connected.
             console.log("Not connected")
-            socket.emit('message', value)// <----Is still emits.
+            socket.emit('message', value) // <----Is still emits.
         }
     </script>
 </body>

@@ -10,6 +10,7 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
 
 	console.log(`User connected in socket ${socket.id}`);
+	socket.emit('message', 'recieved message');
 	//handle when a user disconnects
 	socket.on('disconnect', function () {
 		console.log(`User disconnected in socket ${socket.id} `);
