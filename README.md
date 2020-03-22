@@ -90,6 +90,7 @@ References:
 ### Develop
 
 To develop this document, you can follow the steps provided below:
+
 1. Create a fork of this project on Github.
 2. Ping the author of this repo via Github Issues to see if they are looking for contributions with the specific feature you're looking to add.
 3. Open the file in VS Code and make updates.
@@ -106,6 +107,8 @@ To develop this document, you can follow the steps provided below:
 * [npm](npmjs.com)
 * [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 * [Postman](https://www.postman.com/)
+* [Socket.io](https://socket.io/)
+* [Heroku](https://www.heroku.com)
 
 ***
 ## Author
@@ -126,16 +129,16 @@ To develop this document, you can follow the steps provided below:
 
 #### Setting up Heroku
 
-![Creating a new app in Heroku](public/assets/images/process_Heroku0.PNG)
+![Creating a new app in Heroku.](public/assets/images/process_Heroku0.PNG)
 
-![Entering appname](public/assets/images/process_Heroku00.PNG)
+![Entering Appname.](public/assets/images/process_Heroku00.PNG)
 
-![Connecting Github to Heroku](public/assets/images/process_Heroku1.PNG)
+![Connecting Github to Heroku.](public/assets/images/process_Heroku1.PNG)
 
-![Entering the repository link](public/assets/images/process_Heroku2.PNG)
+![Entering the repository link.](public/assets/images/process_Heroku2.PNG)
 
 
-Now, in order to work with Heroku we need to do two things first:
+Now, in order to work with Heroku in our commandline we need to do two things:
 
 1. Download the Heroku CLI. In Windows you can download it [here.](https://devcenter.heroku.com/articles/heroku-cli)
 
@@ -143,12 +146,27 @@ Now, in order to work with Heroku we need to do two things first:
 
 ![Git](public/assets/images/gitDownload.PNG)
 
+While logged in into you account in the Heroku Website, use the `heroku login` inside of the repository folder assigned earlier. This should connect Heroku to the Github repo.
 
+#### Setting up Socket.io
+
+You can find the repository for Socket.io [here.](https://socket.io/) We'll install it with `npm`.
+
+Mainly the code is as following:
+
+- Server Side
+
+
+
+
+- Client Side
 
 
 
 ## Challenges & Struggles
 
+
+[How to connect to a remote server](https://stackoverflow.com/questions/40869390/how-to-make-remote-websocket-connection-to-nodejs-server-on-heroku)
 ### CSS MIME type error
 
 
