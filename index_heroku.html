@@ -23,6 +23,21 @@ socket.on('time', function(timeString) {
     let el = document.createElement("p");
     el.innerHTML = 'Server time: ' + timeString;
     document.body.append(el);
+
+    if (socket.connected == true) {
+            //Create a a header with the connected socket ID 
+            let connectedContainer = document.createElement("div");
+            let connectedStatus = document.createElement("h2");
+            connectedStatus.setAttribute("class", "connected__status");
+            connectedStatus.setAttribute("id", `${socket.id}__status`);
+            connectedStatus.textContent = `${socket.id} Connected!`;
+            document.body.appendChild(connectedContainer);
+            connectedContainer.appendChild(connectedStatus)
+        } else {
+            // If the socket is not connected print not connected.
+            console.log("Not connected")
+            socket.emit('message', value) // <----Is still emits.
+        }
 });
     </script>
 </body>
