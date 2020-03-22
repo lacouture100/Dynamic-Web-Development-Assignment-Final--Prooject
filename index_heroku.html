@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <title>Data Playground</title>
+    <meta name="Assignment 5" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <base href="/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+</head>
+
+<body>
+    <h1>Test your connections here!</h1>
+
+    <script>
+var socket = io();
+var el;
+
+socket.on('time', function(timeString) {
+    let el = document.createElement("p");
+    el.innerHTML = 'Server time: ' + timeString;
+    document.body.append(el);
+});
+    </script>
+</body>
+
+</html>

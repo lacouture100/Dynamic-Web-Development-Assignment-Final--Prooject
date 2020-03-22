@@ -124,6 +124,19 @@ To develop this document, you can follow the steps provided below:
 
 ### Process & Documentation
 
+#### Setting up Heroku
+
+![Creating a new app in Heroku](public/assets/images/process_Heroku0.PNG)
+
+![Entering appname](public/assets/images/process_Heroku00.PNG)
+
+![Connecting Github to Heroku](public/assets/images/process_Heroku1.PNG)
+
+![Entering the repository link](public/assets/images/process_Heroku2.PNG)
+
+Update your git. In windows you can download it [here.](https://git-scm.com/download/win)
+
+![Git](public/assets/images/gitDownload.PNG)
 
 ## Challenges & Struggles
 
