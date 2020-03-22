@@ -25,6 +25,8 @@ socket.on('time', function(timeString) {
     document.body.append(el);
 
     if (socket.connected == true) {
+        console.log(`${socket.id} Connected!`)
+
             //Create a a header with the connected socket ID 
             let connectedContainer = document.createElement("div");
             let connectedStatus = document.createElement("h2");
