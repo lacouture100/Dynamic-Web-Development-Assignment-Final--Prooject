@@ -134,9 +134,18 @@ To develop this document, you can follow the steps provided below:
 
 ![Entering the repository link](public/assets/images/process_Heroku2.PNG)
 
-Update your git. In windows you can download it [here.](https://git-scm.com/download/win)
+
+Now, in order to work with Heroku we need to do two things first:
+
+1. Download the Heroku CLI. In Windows you can download it [here.](https://devcenter.heroku.com/articles/heroku-cli)
+
+2. Download or update your git. In Windows you can download it [here.](https://git-scm.com/download/win)
 
 ![Git](public/assets/images/gitDownload.PNG)
+
+
+
+
 
 ## Challenges & Struggles
 

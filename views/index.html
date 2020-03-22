@@ -16,11 +16,12 @@
     <h1>Test your connections here!</h1>
 
     <script>
-var socket = io();
-var el;
+const socket = io();
+let el;
+let value = 'hello server'
 
 socket.on('time', function(timeString) {
-    let el = document.createElement("p");
+    el = document.createElement("p");
     el.innerHTML = 'Server time: ' + timeString;
     document.body.append(el);
 
