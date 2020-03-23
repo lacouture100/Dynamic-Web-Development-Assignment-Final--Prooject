@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: OpenSans-Regular;
-    src: url(../assets/fonts/OpenSans-Regular.ttf);
+    font-family:PixelOperator;
+    src: url(../assets/fonts/PixelOperator.ttf);
 }
 
 @font-face {
@@ -64,22 +64,54 @@ main {
 
 .device--main{
     display: flex;
-
+    flex-direction: column;
 }
+
+.device__image{
+    width:5vw;
+    margin-left: auto;
+    margin-right: auto;
+    animation-name: float;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.device__name{
+    color: #FFFFFF;
+    font-family: PixelOperator;
+}
+.device__ip{
+    color: #FFFFFF;
+    font-family: PixelOperator;
+}
+.device__id{
+    color: #FFFFFF;
+    font-family: PixelOperator;
+}
+
+.innerMenu{
+    color: #FFFFFF;
+    opacity: 0.2;
+}
+
 
 @keyframes gradient {
     0% {
         background-position: 0% 0%;
     }
-
     50% {
         background-position: 0% -150%;
     }
-
     100% {
         background-position: 0% 0%;
     }
 }
+
+@keyframes float {
+    0%   {  margin-top: 1rem;}
+    50%  {  margin-top: 0rem;}
+    100% {  margin-top: 1rem;}
+  }
 @media screen and (max-width:2400px) {}
 
 @media screen and (max-width:1400px) {}
