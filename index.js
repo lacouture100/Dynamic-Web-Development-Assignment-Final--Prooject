@@ -62,12 +62,13 @@ io.on('connection', (socket) => {
       return element.id != socket.id;
     }));
     //add the server timestamp to the message
-    timestamp = new Date().toTimeString();
-    console.log(connectedDevices);
+    
+    
   });
 
 });
-
+timestamp = new Date().toTimeString();
+console.log(connectedDevices);
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
 setInterval(() => io.emit('time', timestamp, 1000));
