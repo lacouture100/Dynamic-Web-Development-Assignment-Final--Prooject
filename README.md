@@ -4,7 +4,7 @@
 ### Proposal
 
 
-For my final project I have been thinking on how to connect what I have learned in the class and what I have also learn working with the Raspberry PI and Arduino. I wanted to somehow have my own "backyard" of connections I have going around. For eample, If I am having any one of my Microncontrollers sending any type of data from a sensor, I will be able to see it graphed in my webpage. This way, I can create a boilerplate for myself to store my data in some database online, and also have options of seeing multiple devices at the same time through some kind of appealing UI. Also, If I can input this data into my site I might be able to connect it to any other input or output, video stream, etc... in the future. I have two PIs and two arduinos laying around, so I might as well put them to use now.
+For my final project I have been thinking on how to connect what I have learned in the class and what I have also learn working with the Raspberry PI and Arduino. I wanted to somehow have my own "backyard" of connections I have going around. For example, If I am having any one of my Microncontrollers sending any type of data from a sensor, I will be able to see it displayed in my webpage. This way, I can create a boilerplate for myself to store my data in some database online, and also have options of seeing multiple devices at the same time through some kind of appealing UI. Also, If I can input this data into my site I might be able to connect it to any other input or output, video stream, etc.... I have two PIs and two arduinos laying around, so I might as well put them to use now.
 
 I would start with documenting MongoDB's limits, maybe look at Heroku instead of Glitch also, or some other service that allows seamless updating. After the data can be fetched, I would grab the data stream and implement it into the UI. I would make an object for each of my sensors to send to my database, with a key/value pair which would correspond to :
 
@@ -19,10 +19,7 @@ I would start with documenting MongoDB's limits, maybe look at Heroku instead of
         "Sensor_1_MaxValue":""
     }
 ```
-
-And then send I would pull those values with to my server in order for the client to render them in what I hope can be almost real time. I also have to think about if it is necessary to 'purge' my server of data every certain amount of requests.
-
-I would be very grateful If I could receive advice as to how to be able to update my server values as auickly as the values enter my server. Is Heroku better than MonDB for this task? Is this too out of scale? I think of it as a stepping stone towards my future "swiss knife device control monitor".
+I think of it as a stepping stone towards my future "utility control monitor".
 
 
 References: 
@@ -39,18 +36,20 @@ References:
 
 ### Prerequisites
 
-
+ - Stable internet connection
+ - Coffee
 
 ### Installation
 
   1. Download this repository to your computer.
   2. Open your terminal in the repository folder.
-  3. Make sure you have npm and node.js installed. You can check this with the following commands:
+  3. Make sure you have git, npm, and node.js installed. You can check this with the following commands:
+   `git -v`
    `npm - v` 
    `node -v`
   4. If npm and/or node.js are not installed, you may follow this easy to follow guide from Tania Rascia. [How to Install and Use Node.js and npm (Mac, Windows, Linux)](https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/)
   5. Create a MongoDB Database and a Collection in the MongoDB Atlas Platform. More details of how to do this below.  
-  5. Once everything is installed, type in the following command while in the repository folder:
+  6. Once everything is installed, type in the following command while in the repository folder:
   `npm start`
   6. Open your preferred browser and in the address bar type in `http://localhost:3000/`
 
@@ -157,7 +156,7 @@ Mainly the code is as following:
 - Server Side
 
 
-
+I had to establish an array with current connected users. Everytime the user disconnects the user is removed from the array and consequently, removed from the series of devices being displayed on the website.
 
 - Client Side
 
@@ -168,6 +167,8 @@ Mainly the code is as following:
 
 
 [How to connect to a remote server](https://stackoverflow.com/questions/40869390/how-to-make-remote-websocket-connection-to-nodejs-server-on-heroku)
+
+
 ### CSS MIME type error
 
 

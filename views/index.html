@@ -15,49 +15,54 @@
 </head>
 
 <body>
-    <h1>See your connections here!</h1>
+    <nav class="nav"></nav>
+    <main class="main">
+        <h1>See your connections here!</h1>
+    </main>
     <script>
         const socket = io();
 
         let connectedDevices = [];
 
         socket.on('time', function (timeString) {
-
+            //receive the server timelog
             let timeStamp = timeString;
+            //try to commnuicate with server
             try {
                 socket.emit('webMsg', `Hello from webclient ${socket.id}`, 1000);
 
             } catch (error) {
                 console.log(error)
             }
-
-
-            switch (connectedDevices.includes(socket.id)) {
-                case false:
+            //If our array of devices includes this ID dont create a new DIV
+            while (!connectedDevices.includes(socket.id)) {
                 connectedDevices.push(socket.id);
 
-                    //console.log(`${socket.id} Connected!`)
-                    //Create a a header with the connected socket ID 
-                    let connectedContainer = document.createElement('div');
-                    let connectedStatus = document.createElement('p');
-                    connectedStatus.textContent = `${socket.id} Connected!`;
-                    //Create the class and unique id for each socket.
-                    connectedStatus.setAttribute('class', 'connected__status');
-                    connectedStatus.setAttribute('id', `${socket.id}__status`);
-                    //Append the created tag to the body
-                    document.body.appendChild(connectedContainer);
-                    connectedContainer.appendChild(connectedStatus)
+                //console.log(`${socket.id} Connected!`)
+                //Create a a header with the connected socket ID 
+                let connectedContainer = document.createElement('div');
+                let connectedStatus = document.createElement('p');
+                connectedStatus.textContent = `${socket.id} Connected!`;
+                //Create the class and unique id for each socket container.
+                connectedStatus.setAttribute('class', 'device');
+                connectedStatus.setAttribute('id', `device__${socket.id}`);
+                //Create the class  for each socket status.
+                connectedStatus.setAttribute('class', 'status');
+                //Append the created tag to the body
+                document.body.appendChild(connectedContainer);
+                connectedContainer.appendChild(connectedStatus)
 
-
-                    el = document.createElement("p");
-                    el.textContent = timeString;
-                    connectedContainer.append(el);
-                case true:
-                    console.log("device previously connected")
+                //timelog element
+                el = document.createElement("p");
+                el.textContent = timeString;
+                connectedStatus.append(el);
             }
-            socket.on("disconnected",function (removeEntry)
-            {
-                
+
+            socket.on("disconnected", function (removeEntry) {
+                //get the socket info div
+                const socketContainer = document.getElementById(`device__${socket.id}`);
+                //remove the socket container div
+                socketContainer.remove();
             })
         });
 
@@ -65,8 +70,6 @@
         socket.on('piMsg', function (message) {
             console.log(`Message from pi: ${message}`);
         });
-
-        
     </script>
 </body>
 
