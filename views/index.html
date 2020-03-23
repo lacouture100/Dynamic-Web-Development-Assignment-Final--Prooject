@@ -55,6 +55,10 @@
                 case true:
                     console.log("device previously connected")
             }
+            socket.on("disconnected",function (removeEntry)
+            {
+                
+            })
         });
 
         //Message from Raspberry Pi
@@ -62,9 +66,7 @@
             console.log(`Message from pi: ${message}`);
         });
 
-        function checkConnections(){
-
-        }
+        
     </script>
 </body>
 
