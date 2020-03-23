@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html>
 <!--<![endif]-->
 
@@ -13,8 +15,7 @@
 </head>
 
 <body>
-    <h1>Test your connections here!</h1>
-
+    <h1>See your connections here!</h1>
     <script>
         const socket = io();
         let el;
@@ -39,6 +40,11 @@
                 document.body.appendChild(connectedContainer);
                 connectedContainer.appendChild(connectedStatus)
             }
+        });
+
+        //Message from Raspberry Pi
+        socket.on('piMsg', function (message) {
+            console.log(`Message from pi: ${message}`);
         });
     </script>
 </body>

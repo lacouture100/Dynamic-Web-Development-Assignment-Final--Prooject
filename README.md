@@ -161,6 +161,7 @@ Mainly the code is as following:
 
 - Client Side
 
+- Install `socket.io-client`
 
 
 ## Challenges & Struggles

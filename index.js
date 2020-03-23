@@ -19,9 +19,26 @@ const server = express()
 an argument so that it can listen for socket.io-related requests*/
 const io = socketIO(server);
 
-//Callback event when the client connects
+//Callback event when any client connects
 io.on('connection', (socket) => {
   console.log(`Client connected in socket ${socket.id}.`)
+  console.log(socket.connected) 
+  //Callback event when the client disconnects
+  socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
+});
+
+//Message from Raspberry Pi to server.
+io.on('piMsg', (message) => {
+  console.log(`Received pi message from ${socket.id}.`)
+  console.log(`message: ${piMsg}.`)
+
+  //Callback event when the client disconnects
+  socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
+});
+
+//Message from Raspberry Pi to server.
+io.on('webMsg', (socket) => {
+  console.log(`Received pi message from ${socket.id}.`)
   console.log(socket.connected) 
   //Callback event when the client disconnects
   socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
@@ -30,3 +47,7 @@ io.on('connection', (socket) => {
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+
+
+
+
