@@ -30,7 +30,7 @@ const io = socketIO(server);
 io.on('connection', (socket) => {
   console.log(`Client connected in socket ${socket.id}.`)
   //Message from Raspberry Pi to server.
-  socket.emit(`Hello there ${devices}`);
+  io.emit(`Hello there ${devices}`);
   devices++;
 
   io.on('piMsg', (message) => {
@@ -61,6 +61,7 @@ io.on('connection', (socket) => {
       "id": `${socket.id}`,
       "message": `${message}`
     }
+    io.emit('webMsgReceived', 'received');
 
     //Callback event when the webclient disconnects
     socket.on('disconnect', () => connectedDevices.filter(function (element) {

@@ -30,7 +30,7 @@
             //try to commnuicate with server
             try {
                 socket.emit('webMsg', `Hello from webclient ${socket.id}`);
-                console.log('Message sent.')
+                //console.log('Message sent.')
             } catch (error) {
                 console.log(error)
             }
@@ -65,7 +65,10 @@
                 socketContainer.remove();
             })
         });
+        socket.on('webMsgRecieved', function (timeString) {
+            console.log(`web message received by server`);
 
+        });
         //Message from Raspberry Pi
         socket.on('piMsg', function (message) {
             console.log(`Message from pi: ${message}`);
