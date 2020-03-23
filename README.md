@@ -128,7 +128,7 @@ In different color combinations:
 
 ##### My approach
 
-Still in progress.
+Still in progress. I am using a font called `Pixel Operator`. My logo is on the tio left corner.
 
 ![My approach](public/assets/images/webMockup.jpg)
 
@@ -270,7 +270,7 @@ If you have never setup a Raspberry Pi before, I would recommend following Tom I
 
 You can find the repository for Socket.io [here.](https://socket.io/) We'll install it with `npm` with the `npm install socket.io-client` command in terminal.
 
-The code below is enough for the pi to connect to our Heroku server.
+The code below is enough for the pi to connect to our Heroku server. The idea is to send sensor data like temperature or humidity. You can see the code for working with sensors and the raspberry Pi with this [Pi Environmental sensor](https://alvarolacouture.com/nyu-itp/assignment-3-web-connected-environmental-monitor/) I made.
 
 ```
 
