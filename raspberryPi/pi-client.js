@@ -1,4 +1,7 @@
 var io = require('socket.io-client');
+const socketIO = require('socket.io');
+
+
 var socket = io.connect('https://websockets-playground-2020.herokuapp.com/', {
     reconnect: true,
     transports: ['websocket'],
