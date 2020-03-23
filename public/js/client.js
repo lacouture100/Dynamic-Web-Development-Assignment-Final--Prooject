@@ -9,7 +9,7 @@ socket.on('time', function (timeString) {
     if (!socket.connected) {
         console.log('No one is connected')
     } else {
-        console.log(`${socket.id} Connected!`)
+        //console.log(`${socket.id} Connected!`)
         //Create a a header with the connected socket ID 
         let connectedContainer = document.createElement('div');
         let connectedStatus = document.createElement('h2');

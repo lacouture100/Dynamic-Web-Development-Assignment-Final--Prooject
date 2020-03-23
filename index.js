@@ -4,6 +4,8 @@ const socketIO = require('socket.io');
 const INDEX = 'views/index.html'; // Define the index.html file address
 const PORT= process.env.PORT ||3000;
 let messageInterval = 1000; // counted in milliseconds
+let timestamp;
+let connectedDevices = [];
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -22,9 +24,9 @@ const io = socketIO(server);
 //Callback event when any client connects
 io.on('connection', (socket) => {
   console.log(`Client connected in socket ${socket.id}.`)
-  console.log(socket.connected) 
+  connectedDevices.push(socket.id);
   //Callback event when the client disconnects
-  socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
+  socket.on('disconnect', () => connectedDevices.filter(socket=>socket.id));
 });
 
 //Message from Raspberry Pi to server.
@@ -32,21 +34,23 @@ io.on('piMsg', (message) => {
   console.log(`Received pi message from ${socket.id}.`)
   console.log(`message: ${piMsg}.`)
 
-  //Callback event when the client disconnects
-  socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
+  //Callback event when the pi disconnects
+  socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
 });
 
 //Message from Raspberry Pi to server.
 io.on('webMsg', (socket) => {
-  console.log(`Received pi message from ${socket.id}.`)
-  console.log(socket.connected) 
-  //Callback event when the client disconnects
-  socket.on('disconnect', () => console.log(`Client disconnected from socket ${socket.id}.`));
+  console.log(`Received webclient message from ${socket.id}.`)
+
+  //Callback event when the webclient disconnects
+  socket.on('disconnect', () => console.log(`Webclient disconnected from socket ${socket.id}.`));
 });
+
+timestamp = new Date().toTimeString();
 
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+setInterval(() => io.emit('time', timestamp, 1000));
 
 
 
