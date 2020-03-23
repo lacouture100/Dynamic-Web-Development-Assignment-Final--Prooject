@@ -88,13 +88,31 @@ main {
     color: #FFFFFF;
     font-family: PixelOperator;
 }
+.device__status{
+    color: #FFFFFF;
+    font-family: PixelOperator;
+}
 
 .innerMenu{
     color: #FFFFFF;
     opacity: 0.2;
 }
 
+.sensor{
 
+}
+.sensor__name{
+
+}
+.sensor__type{
+
+}
+.sensor__value{
+
+}
+.sensor__viz{
+    
+}
 @keyframes gradient {
     0% {
         background-position: 0% 0%;
