@@ -13,5 +13,5 @@ socket.on('time', function (timeString) {
     console.log(`Message from server: ${timeString}`);
 });
 
-setInterval(() => socket.emit('piMsg', 'Hello from PI', 1000));
+setInterval(() => io.sockets.emit('piMsg', 'Hello from PI', 1000));
 console.log(`message sent`)
