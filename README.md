@@ -19,6 +19,12 @@ I would start with documenting MongoDB's limits, to see if I need some other ser
 
     }
 ```
+
+So, the system setup in this project would work like this:
+
+1. RaspberryPI(any client really) -----> Server------>WebClient 
+2. Server ------->MongoDB as a backup for data.
+
 I think of it as a stepping stone towards my future "utility control monitor". I also want to make web interfaces to control things inside of other software with websockets functionality like Unity, Touchdesigner, and Runway.
 
 
@@ -26,7 +32,7 @@ I think of it as a stepping stone towards my future "utility control monitor". I
 
 So, everything kind of got tangled up. I set up a lot of individual parts and when joining them together they don't seem to function as well. 
 
-1.  My sockets work with heroku, that's good, this means my raspberry pi and my web client are both remotely communicating with my heroku server/app. However, I am not getting through any messages from my clients to the server. I suspect this is because the 'socket.io-client' package has a different method for emitting messages. I am in the process of finding out why.
+1.  My sockets work with heroku, that's good, this means my heroku server/app are both remotely communicating with my raspberry pi and my web client. However, I am not getting through any messages from my pi to the heroku server. I suspect this is because the 'socket.io-client' package has a different method for emitting messages. I am in the process of finding out why.
    
 2.   I know the MongoDB setup works, and it's in the code lying dormant. It's just a matter of changing the data to send to the one I have received by the pi and/or any other device or socket. 
 
@@ -119,6 +125,8 @@ In different color combinations:
 
 ##### My approach
 
+Still in progress.
+
 ![My approach](public/assets/images/webMockup.jpg)
 
 #### MongoDB Database Setup
@@ -193,9 +201,9 @@ While logged in into you account in the Heroku Website, use the `heroku login` i
 
 #### Setting up Socket.io
 
-When you start looking around reliable realtime communication through the web, it is inevitable to run into Socket.io. After looking through several different resources, included [this blog post](https://davidwalsh.name/websocket), I decided to go for socket.io since 'The WebSocket API is the future of asynchronous messaging; Socket.IO is the best available resource for WebSocket in Node.js and within the browser.'. You can find the website for Socket.io [here.](https://socket.io/) We'll install it with `npm`. 
+When you start looking around reliable realtime communication through the web, it is inevitable to run into Socket.io. After looking through several different resources, included [this blog post](https://davidwalsh.name/websocket), I decided to go for socket.io since 'The WebSocket API is the future of asynchronous messaging; Socket.IO is the best available resource for WebSocket in Node.js and within the browser.'. You can find the website for Socket.io [here.](https://socket.io/) We'll install it with `npm`. To use the code below I followed a page Joey sent me about [setting up websockets with Heroku](https://devcenter.heroku.com/articles/node-websockets).
 
-- Server Side
+##### Server Side
 
 When we talk about sockets, we are using using a server which has a series of clients connected to it. Each client connects through an individual socket or TCP connection, which means that the server opens a socket, the client then connects to the server,which has a callback associated to each event that occurs. In this case, we will create en event called 'event' and send a message associated with that event every five seconds to each of our clients.
 
@@ -229,9 +237,9 @@ setInterval(() => io.emit('event', message, 5000));
 ```
 I had to establish an array with current connected users. Everytime the user disconnects the user is removed from the array and consequently, removed from the series of devices being displayed on the website.
 
-- Client Side
+##### Client Side
 
- Install `socket.io-client` with our terminal.
+ Install `socket.io-client` with our terminal. The code below is enough for our client to receive and print a message form the server.
 
  ```
   const socket = io();
@@ -242,8 +250,6 @@ console.log(message)
         });
         
  ```
-  
-
 
 ---
 
@@ -258,7 +264,6 @@ If you have never setup a Raspberry Pi before, I would recommend following Tom I
 #### Setting up Socket.io
 
 You can find the repository for Socket.io [here.](https://socket.io/) We'll install it with `npm` with the `npm install socket.io-client` command in terminal.
-
 
 The code below is enough for the pi to connect to our Heroku server.
 
@@ -288,6 +293,11 @@ Once you run the script you should see something like the image below. In the im
 
 ![Git](public/assets/images/process_MessagefromPI.PNG)
 
+#### Getting it all together
+
+Now, joining it all together. This is where I am at right now.
+
+So
 
 ---
 

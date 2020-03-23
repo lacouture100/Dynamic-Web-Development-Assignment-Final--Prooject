@@ -30,10 +30,9 @@ const io = socketIO(server);
 io.on('connection', (socket) => {
   console.log(`Client connected in socket ${socket.id}.`)
   //Message from Raspberry Pi to server.
-  io.emit(`Hello there ${devices}`);
   devices++;
 
-  io.on('piMsg', (message) => {
+  socket.on('piMsg', (message) => {
     console.log(`Received pi message from ${socket.id}.`)
     //assign index to the object in the connectedDevices array
     let currentDevices = connectedDevices.length;
@@ -51,8 +50,8 @@ io.on('connection', (socket) => {
   });
 
   //Message from Raspberry Pi to server.
-  io.on('webMsg', (message) => {
-    console.log(`Received webclient message from ${socket.id}.`)
+  socket.on('webMsg', (message) => {
+    //console.log(`Received webclient message from ${socket.id}.`)
     //assign index to the object in the connectedDevices array
     let currentDevices = connectedDevices.length;
     //create the web client message object
@@ -61,8 +60,7 @@ io.on('connection', (socket) => {
       "id": `${socket.id}`,
       "message": `${message}`
     }
-    io.emit('webMsgReceived', 'received');
-
+  
     //Callback event when the webclient disconnects
     socket.on('disconnect', () => connectedDevices.filter(function (element) {
       return element.id != socket.id;

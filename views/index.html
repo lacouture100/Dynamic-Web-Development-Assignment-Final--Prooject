@@ -65,10 +65,7 @@
                 socketContainer.remove();
             })
         });
-        socket.on('webMsgRecieved', function (timeString) {
-            console.log(`web message received by server`);
 
-        });
         //Message from Raspberry Pi
         socket.on('piMsg', function (message) {
             console.log(`Message from pi: ${message}`);
