@@ -19,5 +19,9 @@ socket.on('time', function (timeString) {
     console.log(`Message from server: ${timeString}`);
 });
 
+socket.on('webMsg', function (message) {
+    console.log(`Message from WebClient: ${message}`);
+});
+
 setInterval(() => socket.emit('piMsg', `${myIp}`, 1000));
 console.log(`message sent`)
