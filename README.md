@@ -1,10 +1,13 @@
 # Dynamic-Web-Development
 ## Final Project
 
+[Web client link](https://websockets-playground-2020.herokuapp.com/)
+![My approach](public/assets/images/webMockup.jpg)
+
 ### The Idea
 
 
-For my final project I have been thinking on how to connect what I have learned in the class and how to work with external inputs from devices like Raspberry Pi and Arduino. I wanted to somehow have my own control panel of connections I have setup. For example, If I am having any one of my Microncontrollers sending any type of data from a sensor, I will be able to see it displayed in my webpage. This way, I can create a boilerplate for myself to store my data in some database online, and also have options of seeing multiple devices at the same time through some kind of personalized UI. Also, If I can input this data into my site I might be able to connect it to any other input or output, video stream, etc... I have two PIs and two arduinos laying around, so I might as well put them to use now.
+For my final project I have been thinking on how to connect what I have learned in the class and how to work with external inputs from devices like Raspberry Pi and Arduino. I wanted to somehow have my own control panel of connections I have setup, without relying on some hosting service to handle my data. For example, If I am having any one of my Microncontrollers sending any type of data from a sensor, I will be able to see it displayed in my webpage. This way, I can create a boilerplate for myself to store my data in some database online, and also have options of seeing multiple devices at the same time through some kind of personalized UI. Also, If I can input this data into my site I might be able to connect it to any other input or output, video stream, etc... I have two PIs and two arduinos laying around, so I might as well put them to use now.
 
 I would start with documenting MongoDB's limits, to see if I need some other service that allows seamless updating. After the data can be fetched, I would grab the data stream and implement it into the UI. I would make an object for each of my sensors to send to my database, with a key/value pair which would correspond to :
 
@@ -256,12 +259,14 @@ console.log(message)
 ### Raspberry pi
 
 ---
+![server message to pi](public/assets/images/piLogo8bit.PNG)
+
 #### Pi Setup 
 
 If you have never setup a Raspberry Pi before, I would recommend following Tom Igoe's [Setting up a Raspberry Pi](https://itp.nyu.edu/networks/tutorials/setting-up-a-raspberry-pi/) of which I did a walkthrough blog post [here.](https://alvarolacouture.com/nyu-itp/assignment-3-web-connected-environmental-monitor/)
 
 
-#### Setting up Socket.io
+##### Socket.io setup
 
 You can find the repository for Socket.io [here.](https://socket.io/) We'll install it with `npm` with the `npm install socket.io-client` command in terminal.
 
@@ -289,21 +294,35 @@ socket.on('event', function (message) {
 
 ```
 
-Once you run the script you should see something like the image below. In the image below I decided to send the time.
+Once you run the script you should see something like the image below. In the image below I decided to send the time as the `message` value.
 
-![Git](public/assets/images/process_MessagefromPI.PNG)
+![server message to pi](public/assets/images/process_MessagefromPI.PNG)
 
 #### Getting it all together
 
-Now, joining it all together. This is where I am at right now.
+Now, joining it all together. This is where I am at right now. The server is receiving messages from our web client pretty easily. Each socket connection is assigned a random value so I decided to log it's id and any message. This is made with the `socket.emit()` function.  I made a console log to see what the message is as you can see below.
 
-So
+![Sockets printed on our HTML](public/assets/images/process_1_userConnected.PNG)
+
+In our client I decided to add every client to the HTML file. I am in that process of making one object for each device connected to the server.
+
+![Sockets printed on our HTML](public/assets/images/process_1_userConnectedClientSideNoWork.PNG)
+
+However, you can see the HTML is registering websockets connection in real time (pay attention to the timelog). 
+
+![Sockets printed on our HTML](public/assets/images/process_WebsocketsWorking.PNG)
+
 
 ---
 
 ## Challenges & Struggles
 
-- A bit of trouble with my CSS getting served. This is mostly frustrating when I could not see any error message.
+- Don't know why I have trouble with my CSS and/or client.js getting served. This is mostly frustrating when I could not see any error message, and the error appears as if it is in `client.js`, but the console shows an error in the html file. 
+- 
+![Sockets printed on our HTML](public/assets/images/clientjsErrror.PNG)
+
+![Sockets printed on our HTML](public/assets/images/clientjsErrror2.PNG)
+
 - I did not know what should I put as the host for a websocket out of a local network. This opens up possibilities enormously. Thanks to August Luhrs and Cezar Mocan for helping me understand that. I also found some useful information in this StackOverflow post: 
 [How to connect to a remote server](https://stackoverflow.com/questions/40869390/how-to-make-remote-websocket-connection-to-nodejs-server-on-heroku)
 
