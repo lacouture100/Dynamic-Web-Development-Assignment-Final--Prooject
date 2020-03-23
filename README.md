@@ -189,6 +189,9 @@ Still in progress. I am using a font called `Pixel Operator`. My logo is on the 
 
 ![Enable Automatic Deploy on the same page.](public/assets/images/process_Heroku3.PNG)
 
+6. To open your app go to the main dashboard and press 'Open app' on the upper right corner.
+   
+![Enable Automatic Deploy on the same page.](public/assets/images/heroku_openapp.JPG)
 
 Now, in order to work with Heroku in our commandline we need to do two things:
 
