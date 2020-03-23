@@ -8,4 +8,4 @@ socket.on('connect', function (socket) {
 });
 
 
-setInterval(() => io.emit('piMessage', 'Hello from PI', 1000);
+setInterval(() => io.emit('piMessage', 'Hello from PI', 1000));
