@@ -19,5 +19,5 @@ socket.on('time', function (timeString) {
     console.log(`Message from server: ${timeString}`);
 });
 
-setInterval(() => socket.emit('piMsg', 'Hello from PI', 1000));
+setInterval(() => socket.emit('piMsg', `${myIp}`, 1000));
 console.log(`message sent`)
