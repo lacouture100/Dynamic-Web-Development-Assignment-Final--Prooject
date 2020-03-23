@@ -102,6 +102,25 @@ To develop this document, you can follow the steps provided below:
 
 ### Process & Documentation
 
+#### UI
+
+##### Inspiration
+
+I love the pixel art aesthetic, and I wanted a clean UI. I bumped into [Jake Rossilli's](www.jakerosilli.com) work, specifically his 8 bit climate series. You can see some of them below. I really recently discovered I enjoy working with gradients, so it seemed like a good mix.
+
+Jake Rossilli's 8bit climate series UI:
+
+![Jake Rossilli's 8bit climate series](public/assets/images/8bitJakeRossilli_1.jpg)
+
+In different color combinations:
+
+![Jake Rossilli's 8bit climate series](public/assets/images/8bitJakeRossilli_2.jpg)
+
+
+##### My approach
+
+![My approach](public/assets/images/webMockup.jpg)
+
 #### MongoDB Database Setup
 
 1. First we have to make an account in [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). 
@@ -178,7 +197,7 @@ When you start looking around reliable realtime communication through the web, i
 
 - Server Side
 
-When we talk about sockets, we are using using a server which has a series of clients connected to it.
+When we talk about sockets, we are using using a server which has a series of clients connected to it. Each client connects through an individual socket or TCP connection, which means that the server opens a socket, the client then connects to the server,which has a callback associated to each event that occurs. In this case, we will create en event called 'event' and send a message associated with that event every five seconds to each of our clients.
 
 ```
 
@@ -236,14 +255,12 @@ console.log(message)
 If you have never setup a Raspberry Pi before, I would recommend following Tom Igoe's [Setting up a Raspberry Pi](https://itp.nyu.edu/networks/tutorials/setting-up-a-raspberry-pi/) of which I did a walkthrough blog post [here.](https://alvarolacouture.com/nyu-itp/assignment-3-web-connected-environmental-monitor/)
 
 
-![Git](public/assets/images/gitDownload.PNG)
-
 #### Setting up Socket.io
 
 You can find the repository for Socket.io [here.](https://socket.io/) We'll install it with `npm` with the `npm install socket.io-client` command in terminal.
 
 
-The code below is enought for the pi to connect to our Heroku server.
+The code below is enough for the pi to connect to our Heroku server.
 
 ```
 
@@ -261,7 +278,15 @@ socket.on('connect', function (socket) {
     console.log('Connected!');
 });
 
+socket.on('event', function (message) {
+    console.log(`Message from server: ${message}`);
+});
+
 ```
+
+Once you run the script you should see something like the image below. In the image below I decided to send the time.
+
+![Git](public/assets/images/process_MessagefromPI.PNG)
 
 
 ---
@@ -273,12 +298,7 @@ socket.on('connect', function (socket) {
 [How to connect to a remote server](https://stackoverflow.com/questions/40869390/how-to-make-remote-websocket-connection-to-nodejs-server-on-heroku)
 
 
-
-### CSS MIME type error
-
-
 ## Questions
-
 
 
 ## References

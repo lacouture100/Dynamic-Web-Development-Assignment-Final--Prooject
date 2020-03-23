@@ -29,8 +29,8 @@
             let timeStamp = timeString;
             //try to commnuicate with server
             try {
-                socket.emit('webMsg', `Hello from webclient ${socket.id}`, 1000);
-
+                socket.emit('webMsg', `Hello from webclient ${socket.id}`);
+                console.log('Message sent.')
             } catch (error) {
                 console.log(error)
             }
