@@ -2,7 +2,7 @@
 const express = require('express');
 const socketIO = require('socket.io');
 const INDEX = 'views/index.html'; // Define the index.html file address
-
+const PORT= process.env.PORT ||3000;
 let messageInterval = 1000; // counted in milliseconds
 
 ///////////////////////////////////////////////////////////////////////////
