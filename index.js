@@ -2,10 +2,13 @@
 const express = require('express');
 const socketIO = require('socket.io');
 const INDEX = 'views/index.html'; // Define the index.html file address
-const PORT= process.env.PORT ||3000;
+const PORT = process.env.PORT || 3000;
 let messageInterval = 1000; // counted in milliseconds
 let timestamp;
 let connectedDevices = [];
+
+let piMsg;
+let webMsg;
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -21,37 +24,46 @@ const server = express()
 an argument so that it can listen for socket.io-related requests*/
 const io = socketIO(server);
 
-//Callback event when any client connects
+//Callback event for EACH client
 io.on('connection', (socket) => {
-  console.log(`Client connected in socket ${socket.id}.`)
-  connectedDevices.push(socket.id);
-  //Callback event when the client disconnects
-  socket.on('disconnect', () => connectedDevices.filter(socket=>socket.id));
-});
+      console.log(`Client connected in socket ${socket.id}.`)
+      //Message from Raspberry Pi to server.
+      io.on('piMsg', (message) => {
+            console.log(`Received pi message from ${socket.id}.`)
 
-//Message from Raspberry Pi to server.
-io.on('piMsg', (message) => {
-  console.log(`Received pi message from ${socket.id}.`)
-  console.log(`message: ${piMsg}.`)
+            let currentDevices = connectedDevices.length;
 
-  //Callback event when the pi disconnects
-  socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
-});
+            connectedDevices[currentDevices] = {
+              "device": `Raspberry Pi`,
+              "id": `${socket.id}`,
+              "message": `${message}`
+            }
+            //Callback event when the pi disconnects
+            //socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
+            socket.on('disconnect', () => connectedDevices.filter(function (e) {
+              return connectedDevices.id != socket.id;
+            }));
 
-//Message from Raspberry Pi to server.
-io.on('webMsg', (socket) => {
-  console.log(`Received webclient message from ${socket.id}.`)
+            //Message from Raspberry Pi to server.
+            io.on('webMsg', (message) => {
+              console.log(`Received webclient message from ${socket.id}.`)
+              let currentDevices = connectedDevices.length;
 
-  //Callback event when the webclient disconnects
-  socket.on('disconnect', () => console.log(`Webclient disconnected from socket ${socket.id}.`));
-});
+              connectedDevices[currentDevices] = {
+                "device": `Web Client`,
+                "id": `${socket.id}`,
+                "message": `${message}`
+              }
+              
+              //Callback event when the webclient disconnects
+              socket.on('disconnect', () => connectedDevices.filter(function (e) {
+                return connectedDevices.id != socket.id;
+              }));
 
-timestamp = new Date().toTimeString();
-
-/*This will send an event called 'time' to each client. 
-The event will have the actual time attached.*/
-setInterval(() => io.emit('time', timestamp, 1000));
+            timestamp = new Date().toTimeString();
+            console.log(connectedDevices);
 
 
-
-
+            /*This will send an event called 'time' to each client. 
+            The event will have the actual time attached.*/
+            setInterval(() => io.emit('time', timestamp, 1000));

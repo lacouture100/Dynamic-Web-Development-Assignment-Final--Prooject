@@ -1,5 +1,8 @@
 var io = require('socket.io-client');
 const socketIO = require('socket.io');
+var ip = require('ip');
+ 
+let myIp = ip.address();
 
 
 var socket = io.connect('https://websockets-playground-2020.herokuapp.com/', {
@@ -16,5 +19,5 @@ socket.on('time', function (timeString) {
     console.log(`Message from server: ${timeString}`);
 });
 
-setInterval(() => io.sockets.emit('piMsg', 'Hello from PI', 1000));
+setInterval(() => socket.emit('piMsg', 'Hello from PI', 1000));
 console.log(`message sent`)
