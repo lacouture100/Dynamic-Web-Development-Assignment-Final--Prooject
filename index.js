@@ -1,4 +1,6 @@
 //Install dependencies
+const fs = require("fs");
+const path = require("path");
 const express = require('express');
 const socketIO = require('socket.io');
 const INDEX = 'views/index.html'; // Define the index.html file address
@@ -11,6 +13,9 @@ let devices = 0;
 let piMsg;
 let webMsg;
 
+const app = express(); // Assign express() to a variable
+
+
 ///////////////////////////////////////////////////////////////////////////
 //SOCKET IO
 
@@ -20,7 +25,9 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX, {
     root: __dirname
   }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+  .listen(PORT, () => console.log(`Listening on ${PORT}`))
+
+app.use(express.static(__dirname + '/public')); // <--- not working
 
 /*The Socket.io server takes an HTTP server as 
 an argument so that it can listen for socket.io-related requests*/
@@ -32,45 +39,52 @@ io.on('connection', (socket) => {
   //Message from Raspberry Pi to server.
   devices++;
 
+  raspberryMessage(socket);
+  webclientMessage(socket);
+
+  //Callback event when the pi disconnects
+  //socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
+  socket.on('disconnect', () => connectedDevices.filter(function (element) {
+    return element.id != socket.id;
+  }));
+});
+
+
+
+function raspberryMessage(socket) {
+  //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('piMsg', (message) => {
-    console.log(`Received pi message from ${socket.id}.`)
+    let deviceName = 'Raspberry Pi';
+    //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //assign index to the object in the connectedDevices array
     let currentDevices = connectedDevices.length;
     //create the pi message object
     connectedDevices[currentDevices] = {
-      "device": `Raspberry Pi`,
+      "device": `${deviceName}`,
       "id": `${socket.id}`,
       "message": `${message}`
     }
-    //Callback event when the pi disconnects
-    //socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
-    socket.on('disconnect', () => connectedDevices.filter(function (element) {
-      return element.id != socket.id;
-    }));
-  });
+  })
+};
 
-  //Message from Raspberry Pi to server.
+function webclientMessage(socket) {
+  //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('webMsg', (message) => {
-    //console.log(`Received webclient message from ${socket.id}.`)
+    let deviceName = 'Web Client'
+    console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
+    console.log(`Message: ${message}`);
     //assign index to the object in the connectedDevices array
     let currentDevices = connectedDevices.length;
-    //create the web client message object
+    //create the pi message object
     connectedDevices[currentDevices] = {
-      "device": `Web Client`,
+      "device": `${deviceName}`,
       "id": `${socket.id}`,
       "message": `${message}`
     }
-  
-    //Callback event when the webclient disconnects
-    socket.on('disconnect', () => connectedDevices.filter(function (element) {
-      return element.id != socket.id;
-    }));
-    //add the server timestamp to the message
-    
-    
-  });
+  })
+};
 
-});
+
 timestamp = new Date().toTimeString();
 console.log(connectedDevices);
 /*This will send an event called 'time' to each client. 
@@ -81,8 +95,7 @@ setInterval(() => io.emit('time', timestamp, 5000));
 //MONGODB
 
 /*
-const fs = require("fs");
-const path = require("path");
+
 const config = require("./config");  //Not a library but a file in the directory
 const mongoose = require("mongoose"); //Include package for handling 
 const moment = require("moment"); //include the moment package

@@ -23,17 +23,16 @@
         const socket = io();
 
         let connectedDevices = [];
+        let message = '';
 
         socket.on('time', function (timeString) {
             //receive the server timelog
             let timeStamp = timeString;
-            //try to commnuicate with server
-            try {
-                socket.emit('webMsg', `Hello from webclient ${socket.id}`);
+            //try to commnunicate with server
+            
+                socket.emit('webMsg', `${message}`);
                 //console.log('Message sent.')
-            } catch (error) {
-                console.log(error)
-            }
+            
             //If our array of devices includes this ID dont create a new DIV
             while (!connectedDevices.includes(socket.id)) {
                 connectedDevices.push(socket.id);
