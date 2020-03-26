@@ -28,11 +28,10 @@
         socket.on('time', function (timeString) {
             //receive the server timelog
             let timeStamp = timeString;
-            //try to commnunicate with server
-            
-                socket.emit('webMsg', `${message}`);
-                //console.log('Message sent.')
-            
+            //try to communicate with server
+            socket.emit('webMsg', `${message}`);
+            //console.log('Message sent.')
+
             //If our array of devices includes this ID dont create a new DIV
             while (!connectedDevices.includes(socket.id)) {
                 connectedDevices.push(socket.id);
@@ -47,7 +46,6 @@
                 connectedStatus.setAttribute('id', `device__${socket.id}`);
                 //Create the class  for each socket status.
                 connectedStatus.setAttribute('class', 'status');
-                //Append the created tag to the body
                 document.body.appendChild(connectedContainer);
                 connectedContainer.appendChild(connectedStatus)
 

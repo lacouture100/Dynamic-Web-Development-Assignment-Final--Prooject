@@ -4,6 +4,9 @@ var ip = require('ip');
  
 let myIp = ip.address();
 
+let localURL = 'http://localhost';
+let herokuURL = 'https://websockets-playground-2020.herokuapp.com/';
+
 
 var socket = io.connect('https://websockets-playground-2020.herokuapp.com/', {
     reconnect: true,
