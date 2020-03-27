@@ -6,7 +6,6 @@ const socketIO = require('socket.io');
 const INDEX = 'views/index.html'; // Define the index.html file address
 const PORT = process.env.PORT || 3000;
 let messageInterval = 1000; // counted in milliseconds
-let timestamp;
 let connectedDevices = [];
 let devices = 0;
 
@@ -36,9 +35,9 @@ const io = socketIO(server);
 //Callback event for EACH client
 io.on('connection', (socket) => {
   console.log(`Client connected in socket ${socket.id}.`)
+
   //Message from Raspberry Pi to server.
   devices++;
-
   raspberryMessage(socket);
   webclientMessage(socket);
 
@@ -46,6 +45,7 @@ io.on('connection', (socket) => {
   //socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
   socket.on('disconnect', () => connectedDevices.filter(function (element) {
     return element.id != socket.id;
+
   }));
 });
 
@@ -55,14 +55,17 @@ function raspberryMessage(socket) {
   //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('piMsg', (message) => {
     let deviceName = 'Raspberry Pi';
-    //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
-    //assign index to the object in the connectedDevices array
-    let currentDevices = connectedDevices.length;
+    let timestamp = new Date().toTimeString();
+    let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
+
+
+    console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
     connectedDevices[currentDevices] = {
-      "device": `${deviceName}`,
-      "id": `${socket.id}`,
-      "message": `${message}`
+      device: `${deviceName}`,
+      id: `${socket.id}`,
+      message: `${message}`,
+      time: `${timestamp}`
     }
   })
 };
@@ -71,25 +74,28 @@ function webclientMessage(socket) {
   //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('webMsg', (message) => {
     let deviceName = 'Web Client'
+    let timestamp = new Date().toTimeString();
+    let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
+
     console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     console.log(`Message: ${message}`);
-    //assign index to the object in the connectedDevices array
-    let currentDevices = connectedDevices.length;
+
     //create the pi message object
     connectedDevices[currentDevices] = {
-      "device": `${deviceName}`,
-      "id": `${socket.id}`,
-      "message": `${message}`
+      device: `${deviceName}`,
+      id: `${socket.id}`,
+      message: `${message}`,
+      time: `${timestamp}`
     }
   })
 };
 
 
-timestamp = new Date().toTimeString();
 console.log(connectedDevices);
+
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
-setInterval(() => io.emit('time', timestamp, 5000));
+//setInterval(() => io.emit('time', timestamp, 5000));
 
 /////////////////////////////////////////////////////////////////////
 //MONGODB

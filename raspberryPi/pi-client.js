@@ -8,7 +8,7 @@ let localURL = 'http://localhost';
 let herokuURL = 'https://websockets-playground-2020.herokuapp.com/';
 
 
-var socket = io.connect('https://websockets-playground-2020.herokuapp.com/', {
+var socket = io.connect(localURL, {
     reconnect: true,
     transports: ['websocket'],
     path: '/socket.io'
