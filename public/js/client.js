@@ -1,19 +1,22 @@
 const socket = io();
-
 let connectedDevices = [];
+let message = 'Hello from web client';
 
-socket.on('time', function (timeString) {
 
-    let timeStamp = timeString;
-    //socket.emit is not a cleint function
-    try {
-        socket.emit('webMsg', `Hello from webclient ${socket.id}`, 1000);
+socket.on('connectedDevices', function (message) {
+    //console.log(message);
+    connectedDevices = message;
 
-    } catch (error) {
-        console.log(error)
-    }
+    connectedDevices.forEach(element => {
+        console.log(element)
+    });
+/* 
+    connectedDevices.filter(function (element) {
+        return element.id != socket.id;
+    });
 
-    while (!connectedDevices.includes(socket.id)) {
+    //If our array of devices includes this ID dont create a new DIV
+    while (!connectedDevices.id.includes(socket.id)) {
         connectedDevices.push(socket.id);
 
         //console.log(`${socket.id} Connected!`)
@@ -21,28 +24,35 @@ socket.on('time', function (timeString) {
         let connectedContainer = document.createElement('div');
         let connectedStatus = document.createElement('p');
         connectedStatus.textContent = `${socket.id} Connected!`;
-        //Create the class and unique id for each socket.
-        connectedStatus.setAttribute('class', 'connected__status');
-        connectedStatus.setAttribute('id', `${socket.id}__status`);
-        //Append the created tag to the body
+        //Create the class and unique id for each socket container.
+        connectedStatus.setAttribute('class', 'device');
+        connectedStatus.setAttribute('id', `device__${socket.id}`);
+        //Create the class  for each socket status.
+        connectedStatus.setAttribute('class', 'status');
         document.body.appendChild(connectedContainer);
         connectedContainer.appendChild(connectedStatus)
 
 
-        el = document.createElement("p");
-        el.textContent = timeString;
-        connectedStatus.append(el);
     }
 
     socket.on("disconnected", function (removeEntry) {
         //get the socket info div
-        const socketContainer = document.getElementById(`${socket.id}__status`);
-        //remove the socket div
+        const socketContainer = document.getElementById(`device__${socket.id}`);
+        //remove the socket container div
         socketContainer.remove();
-    })
+    }) */
 });
 
-//Message from Raspberry Pi
-socket.on('piMsg', function (message) {
-    console.log(`Message from pi: ${message}`);
+
+socket.on('time', function (timeString) {
+    //receive the server timelog
+    let timeStamp = timeString;
+    //try to communicate with server
+    //socket.emit('webMsg', `${message}`);
+    //console.log('Message sent.')
+
+    //Message from Raspberry Pi
+    socket.on('piMsg', function (message) {
+        //console.log(`Message from pi: ${message}`);
+    });
 });
