@@ -3,8 +3,8 @@ const socketIO = require('socket.io');
 var ip = require('ip');
  
 let myIp = ip.address();
-
-let localURL = 'http://192.168.106.153';
+;
+let localURL = 'http://192.168.106.153:3000';
 let herokuURL = 'https://websockets-playground-2020.herokuapp.com/';
 
 

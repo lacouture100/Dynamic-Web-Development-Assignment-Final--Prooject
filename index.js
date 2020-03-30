@@ -26,7 +26,7 @@ const server = express()
   }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
-app.use(express.static(__dirname + '/public')); // <--- not working
+app.use(express.static(__dirname + '/public'));
 
 /*The Socket.io server takes an HTTP server as 
 an argument so that it can listen for socket.io-related requests*/
@@ -90,12 +90,13 @@ function webclientMessage(socket) {
   })
 };
 
+let timestamp = new Date().toTimeString();
 
 console.log(connectedDevices);
 
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
-//setInterval(() => io.emit('time', timestamp, 5000));
+setInterval(() => io.emit('time', timestamp, 5000));
 
 /////////////////////////////////////////////////////////////////////
 //MONGODB
