@@ -301,6 +301,11 @@ Once you run the script you should see something like the image below. In the im
 
 ![server message to pi](public/assets/images/process_MessagefromPI.PNG)
 
+In order to see the messages going towards the server in Heroku, we can use the `heroku logs -a our-app-name` in order the see the server console log.
+
+![Heroku server log](public/assets/images/heroku_serverLog.JPG)
+
+
 #### Getting it all together
 
 Now, joining it all together. This is where I am at right now. The server is receiving messages from our web client pretty easily. Each socket connection is assigned a random value so I decided to log it's id and any message. This is made with the `socket.emit()` function.  I made a console log to see what the message is as you can see below.

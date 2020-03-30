@@ -41,12 +41,19 @@ io.on('connection', (socket) => {
   raspberryMessage(socket);
   webclientMessage(socket);
 
+  io.emit('connectedDevices', connectedDevices);
   //Callback event when the pi disconnects
-  //socket.on('disconnect', () => console.log(`Pi disconnected from socket ${socket.id}.`));
-  socket.on('disconnect', () => connectedDevices.filter(function (element) {
-    return element.id != socket.id;
+  socket.on('disconnect', (socket) => {
+    connectedDevices.filter(function (element) {
+      return element.id != socket.id;
+    });
+    io.emit('connectedDevices', connectedDevices);
 
-  }));
+  });
+  /*   socket.on('disconnect', () => connectedDevices.filter(function (element) {
+      return element.id != socket.id;
+
+    })); */
 });
 
 
@@ -59,7 +66,7 @@ function raspberryMessage(socket) {
     let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
 
-    console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
+    //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
     connectedDevices[currentDevices] = {
       device: `${deviceName}`,
@@ -77,8 +84,8 @@ function webclientMessage(socket) {
     let timestamp = new Date().toTimeString();
     let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
-    console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
-    console.log(`Message: ${message}`);
+    //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
+    //console.log(`Message: ${message}`);
 
     //create the pi message object
     connectedDevices[currentDevices] = {
@@ -97,6 +104,7 @@ console.log(connectedDevices);
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
 setInterval(() => io.emit('time', timestamp, 5000));
+
 
 /////////////////////////////////////////////////////////////////////
 //MONGODB

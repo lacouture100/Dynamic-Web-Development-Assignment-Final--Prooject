@@ -20,11 +20,16 @@
         <h1>See your connections here!</h1>
     </main>
     <script>
-        
+
         const socket = io();
         let connectedDevices = [];
         let message = '';
 
+
+        socket.on('connectedDevices', function (message) {
+            console.log(message);
+
+        });
         socket.on('time', function (timeString) {
             //receive the server timelog
             let timeStamp = timeString;
