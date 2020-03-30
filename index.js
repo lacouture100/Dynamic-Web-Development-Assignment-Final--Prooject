@@ -14,6 +14,7 @@ let webMsg;
 
 const app = express(); // Assign express() to a variable
 
+let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
 ///////////////////////////////////////////////////////////////////////////
 //SOCKET IO
@@ -63,7 +64,6 @@ function raspberryMessage(socket) {
   socket.on('piMsg', (message) => {
     let deviceName = 'Raspberry Pi';
     let timestamp = new Date().toTimeString();
-    let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)

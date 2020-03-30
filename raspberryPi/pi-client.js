@@ -19,12 +19,13 @@ socket.on('connect', function (socket) {
     console.log('Connected!');
 });
 socket.on('time', function (timeString) {
-    console.log(`Message from server: ${timeString}`);
+    //console.log(`Timefrom server: ${timeString}`);
+
 });
 
 socket.on('webMsg', function (message) {
     console.log(`Message from WebClient: ${message}`);
 });
 
-setInterval(() => socket.emit('piMsg', `Hello from pi`, 1000));
+setInterval(() => socket.emit('piMsg', `Hello from pi`, 10000));
 console.log(`message sent`)
