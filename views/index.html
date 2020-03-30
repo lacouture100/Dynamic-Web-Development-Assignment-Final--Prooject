@@ -28,6 +28,7 @@
 
         socket.on('connectedDevices', function (message) {
             console.log(message);
+            connectedDevices = message
 
         });
         socket.on('time', function (timeString) {
@@ -38,7 +39,7 @@
             //console.log('Message sent.')
 
             //If our array of devices includes this ID dont create a new DIV
-            while (!connectedDevices.includes(socket.id)) {
+            while (!connectedDevices.id.includes(socket.id)) {
                 connectedDevices.push(socket.id);
 
                 //console.log(`${socket.id} Connected!`)
@@ -70,7 +71,7 @@
 
         //Message from Raspberry Pi
         socket.on('piMsg', function (message) {
-            console.log(`Message from pi: ${message}`);
+            //console.log(`Message from pi: ${message}`);
         });
     </script>
 </body>
