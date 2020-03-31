@@ -63,7 +63,7 @@ function raspberryMessage(socket) {
   socket.on('piMsg', (message) => {
     let deviceName = 'Raspberry Pi';
     let timestamp = new Date().toTimeString();
-
+    currentDevices = connectedDevices.length
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
@@ -81,12 +81,12 @@ function webclientMessage(socket) {
   socket.on('webMsg', (message) => {
     let deviceName = 'Web Client'
     let timestamp = new Date().toTimeString();
-
+    currentDevices = connectedDevices.length
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //console.log(`Message: ${message}`);
 
     //create the pi message object
-    connectedDevices[currentDevices] ={
+    connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
       message: `${message}`,
