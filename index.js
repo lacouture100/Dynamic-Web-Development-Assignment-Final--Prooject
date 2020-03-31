@@ -36,7 +36,7 @@ const io = socketIO(server);
 
 //Callback event for EACH client
 io.on('connection', (socket) => {
-  console.log(`Client connected in socket ${socket.id}.`)
+  //console.log(`Client connected in socket ${socket.id}.`)
   //Message from Raspberry Pi to server.
   currentDevices = connectedDevices.length;
   raspberryMessage(socket);
@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
 
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
-    var index = socketList.indexOf(socket.id);
+    var index = socketList.indexOf(`${socket.id}`);
     socketList = socketList.splice(index, 1);
     connectedDevices.filter(function (element) {
       return element.id != socket.id;
