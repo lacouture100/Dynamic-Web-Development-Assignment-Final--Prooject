@@ -44,11 +44,10 @@ io.on('connection', (socket) => {
 
   socketList.push(socket.id);
 
-
-  //io.emit('connectedDevices', connectedDevices);
+///////////////////////////////////////////////////////////////   HERE IS WHERE IS SEND THE CONNECTED DEVICES
+  io.emit('connectedDevices', connectedDevices);
   io.emit('connectedDevices', socketList);
 
-  
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
     var index = socketList.indexOf(socket.id);
@@ -56,7 +55,10 @@ io.on('connection', (socket) => {
     connectedDevices.filter(function (element) {
       return element.id != socket.id;
     });
-    //io.emit('connectedDevices', connectedDevices);
+
+//////////////////////////////////////////////////////////////    HERE IS WHERE WE SEND THE UPDATED LIST OF DEVICES AFTER ONE DISCONNECTS
+
+    io.emit('connectedDevices', connectedDevices);
     io.emit('connectedDevices', socketList);
   });
   /*   socket.on('disconnect', () => connectedDevices.filter(function (element) {
