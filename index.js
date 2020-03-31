@@ -26,9 +26,9 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX, {
     root: __dirname
   }))
-  .app.use(express.static(__dirname + '/public'))
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
+app.use(express.static(__dirname + '/public'));
 
 /*The Socket.io server takes an HTTP server as 
 an argument so that it can listen for socket.io-related requests*/
