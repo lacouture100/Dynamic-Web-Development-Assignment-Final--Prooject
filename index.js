@@ -14,6 +14,7 @@ let piMsg;
 let webMsg;
 
 const app = express(); // Assign express() to a variable
+app.use(express.static(__dirname + '/public'));
 
 let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
