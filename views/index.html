@@ -29,32 +29,34 @@
 
         socket.on('connectedDevices', function (message) {
             //console.log(message);
-            connectedDevices = message;
 
-            connectedDevices.forEach(element => {
+            message.forEach(element => {
                 console.log(element)
-            });
-            /* 
-                connectedDevices.filter(function (element) {
-                    return element.id != socket.id;
-                });
-
-                //If our array of devices includes this ID dont create a new DIV
-                while (!connectedDevices.id.includes(socket.id)) {
-                    connectedDevices.push(socket.id);
+                let device = element.device;
+                let id = element.id;
+                let message = element.message;
+                let messageTime = element.time;
+                while (!connectedDevices.includes(socket.id)) {
+                    connectedDevices.push(element);
 
                     //console.log(`${socket.id} Connected!`)
                     //Create a a header with the connected socket ID 
-                    let connectedContainer = document.createElement('div');
-                    let connectedStatus = document.createElement('p');
-                    connectedStatus.textContent = `${socket.id} Connected!`;
+                    let devicesContainer = document.createElement('div');
+                    let deviceId = document.createElement('p');
+                    let deviceMsg = document.createElement('p');
+                    let messageTime = document.createElement('p');
+
+
+                    deviceId.textContent = `${device} connected in socket ${id}!`;
                     //Create the class and unique id for each socket container.
-                    connectedStatus.setAttribute('class', 'device');
-                    connectedStatus.setAttribute('id', `device__${socket.id}`);
+                    deviceId.setAttribute('class', 'device');
+                    deviceId.setAttribute('id', `device__${socket.id}`);
                     //Create the class  for each socket status.
-                    connectedStatus.setAttribute('class', 'status');
-                    document.body.appendChild(connectedContainer);
-                    connectedContainer.appendChild(connectedStatus)
+                    deviceId.setAttribute('class', 'status');
+
+
+                    document.body.appendChild(devicesContainer);
+                    devicesContainer.appendChild(deviceId)
 
 
                 }
@@ -64,7 +66,16 @@
                     const socketContainer = document.getElementById(`device__${socket.id}`);
                     //remove the socket container div
                     socketContainer.remove();
-                }) */
+                    
+                }) 
+            });
+            /* 
+                connectedDevices.filter(function (element) {
+                    return element.id != socket.id;
+                });
+
+                //If our array of devices includes this ID dont create a new DIV
+                
         });
 
 
