@@ -7,7 +7,6 @@ const INDEX = 'views/index.html'; // Define the index.html file address
 const PORT = process.env.PORT || 3000;
 let messageInterval = 1000; // counted in milliseconds
 let connectedDevices = [];
-let devices = 0;
 
 let piMsg;
 let webMsg;
@@ -35,10 +34,9 @@ const io = socketIO(server);
 
 //Callback event for EACH client
 io.on('connection', (socket) => {
-  console.log(`Client connected in socket ${socket.id}.`)
+  //console.log(`Client connected in socket ${socket.id}.`)
 
   //Message from Raspberry Pi to server.
-  devices++;
   raspberryMessage(socket);
   webclientMessage(socket);
 
@@ -68,19 +66,19 @@ function raspberryMessage(socket) {
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
-    connectedDevices[currentDevices] = {
+    connectedDevices.push({
       device: `${deviceName}`,
       id: `${socket.id}`,
       message: `${message}`,
       time: `${timestamp}`
-    }
-  })
+    });
+  });
 };
 
 function webclientMessage(socket) {
   //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('webMsg', (message) => {
-    let deviceName = 'Web Client'
+    let deviceName = 'Web Client';
     let timestamp = new Date().toTimeString();
     let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
@@ -88,13 +86,13 @@ function webclientMessage(socket) {
     //console.log(`Message: ${message}`);
 
     //create the pi message object
-    connectedDevices[currentDevices] = {
+    connectedDevices.push({
       device: `${deviceName}`,
       id: `${socket.id}`,
       message: `${message}`,
       time: `${timestamp}`
-    }
-  })
+    });
+  });
 };
 
 let timestamp = new Date().toTimeString();
