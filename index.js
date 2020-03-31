@@ -82,7 +82,6 @@ function webclientMessage(socket) {
   socket.on('webMsg', (message) => {
     let deviceName = 'Web Client'
     let timestamp = new Date().toTimeString();
-    let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //console.log(`Message: ${message}`);
