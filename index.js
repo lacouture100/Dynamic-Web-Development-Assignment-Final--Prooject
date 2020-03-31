@@ -20,6 +20,10 @@ let currentDevices = connectedDevices.length; //assign index to the object in th
 ///////////////////////////////////////////////////////////////////////////
 //SOCKET IO
 
+
+
+app.use(express.static(__dirname + '/public'));
+app.listen(process.env.PORT || 3000);
 /*We need an HTTP server to serve our client-side assets and 
 provide a hook for the WebSocket server to monitor for requests. */
 const server = express()
@@ -28,7 +32,6 @@ const server = express()
   }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
-app.use(express.static(__dirname + '/public'));
 
 /*The Socket.io server takes an HTTP server as 
 an argument so that it can listen for socket.io-related requests*/
