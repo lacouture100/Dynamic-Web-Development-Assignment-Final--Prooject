@@ -66,19 +66,20 @@ function raspberryMessage(socket) {
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
-    connectedDevices.push({
+    connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
+      index: `${connectedDevices[currentDevices]}`,
       message: `${message}`,
       time: `${timestamp}`
-    });
-  });
+    }
+  })
 };
 
 function webclientMessage(socket) {
   //HAVE TO TAKE THIS OUT OF THE CONNECITON LISTENER, BUT SOCKET.ID
   socket.on('webMsg', (message) => {
-    let deviceName = 'Web Client';
+    let deviceName = 'Web Client'
     let timestamp = new Date().toTimeString();
     let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
@@ -86,13 +87,14 @@ function webclientMessage(socket) {
     //console.log(`Message: ${message}`);
 
     //create the pi message object
-    connectedDevices.push({
+    connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
+      index: `${connectedDevices[currentDevices]}`,
       message: `${message}`,
       time: `${timestamp}`
-    });
-  });
+    }
+  })
 };
 
 let timestamp = new Date().toTimeString();
