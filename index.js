@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
     var index = socketList.indexOf(socket.id);
-    if (index !== -1) socketList.splice(index, 1);
+    socketList = socketList.splice(index, 1);
     connectedDevices.filter(function (element) {
       return element.id != socket.id;
     });
