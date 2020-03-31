@@ -321,6 +321,9 @@ However, you can see the HTML is registering websockets connection in real time 
 ![Sockets printed on our HTML](public/assets/images/process_WebsocketsWorking.PNG)
 
 
+
+
+FIRST I HAVE TO SEND A LIST OF CONNECTED DEVICES, THEN I SHOULD SEND THE VALUES. For each socket in the array sent, make an object which is updated with each new message. Precisely, I will first send an array with the socket.id's which are connected to my server, then create an object inside my server which is updated with each new value.
 ---
 
 ## Challenges & Struggles

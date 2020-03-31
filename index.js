@@ -13,17 +13,18 @@ let socketList = [];
 let piMsg;
 let webMsg;
 
+let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
+
 const app = express(); // Assign express() to a variable
 app.use(express.static(__dirname + '/public'));
 
-let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
 ///////////////////////////////////////////////////////////////////////////
 //SOCKET IO
 
 /*We need an HTTP server to serve our client-side assets and 
 provide a hook for the WebSocket server to monitor for requests. */
-const server = express()
+const server = app
   .use((req, res) => res.sendFile(INDEX, {
     root: __dirname
   }))
