@@ -24,6 +24,8 @@
         let connectedDevices = [];
         let message = 'Hello from web client';
 
+            socket.emit('webMsg', `${message}`);
+
 
         socket.on('connectedDevices', function (message) {
             //console.log(message);
@@ -70,8 +72,7 @@
             //receive the server timelog
             let timeStamp = timeString;
             //try to communicate with server
-            //socket.emit('webMsg', `${message}`);
-            //console.log('Message sent.')
+
 
             //Message from Raspberry Pi
             /* socket.on('piMsg', function (message) {
