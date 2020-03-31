@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
   io.emit('connectedDevices', connectedDevices);
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
-    connectedDevices.filter(function (device) {
-      return device.id != socket.id;
+    connectedDevices.filter(function (element) {
+      return element.id != socket.id;
     });
     io.emit('connectedDevices', connectedDevices);
 
