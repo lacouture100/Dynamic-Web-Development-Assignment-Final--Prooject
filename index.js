@@ -7,6 +7,7 @@ const INDEX = 'views/index.html'; // Define the index.html file address
 const PORT = process.env.PORT || 3000;
 let messageInterval = 1000; // counted in milliseconds
 let connectedDevices = [];
+let devices = 0;
 
 let piMsg;
 let webMsg;
@@ -34,9 +35,10 @@ const io = socketIO(server);
 
 //Callback event for EACH client
 io.on('connection', (socket) => {
-  //console.log(`Client connected in socket ${socket.id}.`)
+  console.log(`Client connected in socket ${socket.id}.`)
 
   //Message from Raspberry Pi to server.
+  devices++;
   raspberryMessage(socket);
   webclientMessage(socket);
 
@@ -44,7 +46,7 @@ io.on('connection', (socket) => {
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
     connectedDevices.filter(function (device) {
-      return device.id !== socket.id;
+      return device.id != socket.id;
     });
     io.emit('connectedDevices', connectedDevices);
 
@@ -69,7 +71,6 @@ function raspberryMessage(socket) {
     connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
-      index: `${connectedDevices[currentDevices]}`,
       message: `${message}`,
       time: `${timestamp}`
     }
@@ -90,7 +91,6 @@ function webclientMessage(socket) {
     connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
-      index: `${connectedDevices[currentDevices]}`,
       message: `${message}`,
       time: `${timestamp}`
     }
