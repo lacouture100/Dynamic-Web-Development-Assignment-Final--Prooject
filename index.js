@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
   //Callback event when the pi disconnects
   socket.on('disconnect', (socket) => {
     connectedDevices.filter(function (element) {
-      return element.id !== socket.id;
+      return element.id != socket.id;
     });
     io.emit('connectedDevices', connectedDevices);
 
@@ -67,12 +67,12 @@ function raspberryMessage(socket) {
 
     //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
-    connectedDevices.push({
+    connectedDevices[currentDevices] = {
       device: `${deviceName}`,
       id: `${socket.id}`,
       message: `${message}`,
       time: `${timestamp}`
-    })
+    }
   })
 };
 
@@ -86,22 +86,22 @@ function webclientMessage(socket) {
     //console.log(`Message: ${message}`);
 
     //create the pi message object
-    connectedDevices.push({
+    connectedDevices[currentDevices] ={
       device: `${deviceName}`,
       id: `${socket.id}`,
       message: `${message}`,
       time: `${timestamp}`
-    })
+    }
   })
 };
 
-let timestamp = new Date().toTimeString();
+//let timestamp = new Date().toTimeString();
 
 console.log(connectedDevices);
 
 /*This will send an event called 'time' to each client. 
 The event will have the actual time attached.*/
-setInterval(() => io.emit('time', timestamp, 5000));
+//setInterval(() => io.emit('time', timestamp, 5000));
 
 
 /////////////////////////////////////////////////////////////////////
