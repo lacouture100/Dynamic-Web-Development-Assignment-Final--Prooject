@@ -15,6 +15,7 @@ let webMsg;
 
 let currentDevices = connectedDevices.length; //assign index to the object in the connectedDevices array
 
+
 const app = express(); // Assign express() to a variable
 app.use(express.static(__dirname + '/public'));
 
