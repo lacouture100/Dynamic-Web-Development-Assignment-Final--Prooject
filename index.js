@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
   //console.log(`Client connected in socket ${socket.id}.`)
   //Message from Raspberry Pi to server.
   currentDevices = connectedDevices.length;
+  console.log(socket.id);
   raspberryMessage(socket);
   webclientMessage(socket);
 
