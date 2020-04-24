@@ -80,7 +80,7 @@ function raspberryMessage(socket) {
     let timestamp = new Date().toTimeString();
 
 
-    //console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
+    console.log(`Received message from ${deviceName} in socket [${socket.id}].`)
     //create the pi message object
     connectedDevices[currentDevices] = {
       device: `${deviceName}`,
