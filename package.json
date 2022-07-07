@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "ip": "^1.1.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.3",
     "path": "^0.12.7",
     "socket.io": "^2.3.0"
